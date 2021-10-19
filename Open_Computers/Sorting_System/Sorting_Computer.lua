@@ -244,6 +244,15 @@ alphabet["Z"] =
 
 
 
+--Items
+local items = {}
+items[0] = {"Gold Ingot", "gold_ingot"}
+items[1] = {"Gold Ore", "gold_ore"}
+items[2] = {"Stone", "stone"}
+items[3] = {"Dirt", "dirt"}
+
+
+
 --Functions
 local function decode(letter, x, y)
   local left = x
@@ -263,8 +272,42 @@ end
 end    
 end
 
-local functino decodeSentence(str, x, y)
+local function decodeSentence(str, x, y)
+  for i = 1, #str do
+    local c = str:sub(i,i)
+    decode(c, x, y)
+    if (c == "I" or c == "P" or c == "R" or c == "S" or c == "X" or c == "Y" or c == "Z") then
+      x = x + 5
+    else if (c == "M" or c == "N" or c == "T" or c == "V") then
+        x = x + 7
+    else if (c == "W") then
+        x = x + 9
+    end
+    end
+    end    
+  end
+end
+
+local function createRow(index, fromTop) --fromTop is the row number, with the top being 1 and the bottom being 4
+  gpu.setResolution(160, 50)
+  local w, h = gpu.getResolution()
   
+  gpu.setBackground(0x146a80)
+  gpu.fill(1, (fromTop * h / ), w, h/8, " ")
+  gpu.set(w/8, h/8, "Gold Ore")
+
+  gpu.setBackground(0xFFFFFF)
+  gpu.fill(1, 1, w, 1, " ")
+  gpu.fill(1, 1, 2, h/4, " ")
+  gpu.fill(w-1, 1, 2, h/4, " ")
+  gpu.fill(1, h/4, w, 1, " ")
+end
+
+local function displayScreen(topItemIndex)
+  createRow(topItemIndex, 1)
+  createRow(topItemIndex + 1, 2)
+  createRow(topItemIndex + 2, 3)
+  createRow(topItemIndex + 3, 4)
 end
 
 
@@ -273,24 +316,24 @@ end
 gpu.setResolution(160, 50)
 local w, h = gpu.getResolution()
   
-gpu.setBackground(0x146a80)
-gpu.fill(1, 1, w, h/8, " ")
-gpu.set(w/8, h/8, "Gold Ore")
+--gpu.setBackground(0x146a80)
+--gpu.fill(1, 1, w, h/8, " ")
+--gpu.set(w/8, h/8, "Gold Ore")
 
-gpu.setBackground(0xFFFFFF)
-gpu.fill(1, 1, w, 1, " ")
-gpu.fill(1, 1, 2, h/4, " ")
-gpu.fill(w-1, 1, 2, h/4, " ")
-gpu.fill(1, h/4, w, 1, " ")
+--gpu.setBackground(0xFFFFFF)
+--gpu.fill(1, 1, w, 1, " ")
+--gpu.fill(1, 1, 2, h/4, " ")
+--gpu.fill(w-1, 1, 2, h/4, " ")
+--gpu.fill(1, h/4, w, 1, " ")
 
-decode("G", w/8, (h/8)-1)
-decode("O", (w/8)+6, (h/8)-1)
-decode("L", (w/8)+12, (h/8)-1)
-decode("D", (w/8)+18, (h/8)-1)
+--decode("G", w/8, (h/8)-1)
+--decode("O", (w/8)+6, (h/8)-1)
+--decode("L", (w/8)+12, (h/8)-1)
+--decode("D", (w/8)+18, (h/8)-1)
 
-decode("O", (w/8)+27, (h/8)-1)
-decode("R", (w/8)+33, (h/8)-1)
-decode("E", (w/8)+38, (h/8)-1)
+--decode("O", (w/8)+27, (h/8)-1)
+--decode("R", (w/8)+33, (h/8)-1)
+--decode("E", (w/8)+38, (h/8)-1)
 
 
 print(event.pull("key_down"))

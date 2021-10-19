@@ -263,6 +263,10 @@ end
 end    
 end
 
+local functino decodeSentence(str, x, y)
+  
+end
+
 
 
 --Main

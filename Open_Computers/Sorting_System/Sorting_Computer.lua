@@ -293,7 +293,7 @@ local function createRow(index, fromTop) --fromTop is the row number, with the t
   local w, h = gpu.getResolution()
   
   gpu.setBackground(0x146a80)
-  gpu.fill(1, (fromTop * h / ), w, h/8, " ")
+  gpu.fill(1, ((fromTop * h / 4) + 1), w, (((fromTop * h / 4) + 1) + h/8), " ") --Probably won't work atm
   gpu.set(w/8, h/8, "Gold Ore")
 
   gpu.setBackground(0xFFFFFF)
@@ -315,7 +315,22 @@ end
 --Main
 gpu.setResolution(160, 50)
 local w, h = gpu.getResolution()
+local topItemIndex = 0
+
+displayScreen(topItemIndex)
+
+while true do
+  local _, _, _, scrollDir, _ = event.pull("scroll") --Note to self: test best way to check for either scroll, key press, or mouse click
+  if (scrollDir < 0 and topItemIndex < 10) then
+    topItemIndex = topItemIndex + 1
+    displayScreen(topItemIndex)
+  end
+  if (scrollDir > 0 and topItemIndex > 0) then
+    topItemIndex = topItemIndex + 1
+    displayScreen(topItemIndex)
+  end
   
+end  
 --gpu.setBackground(0x146a80)
 --gpu.fill(1, 1, w, h/8, " ")
 --gpu.set(w/8, h/8, "Gold Ore")

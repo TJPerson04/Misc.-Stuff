@@ -253,7 +253,7 @@ items[3] = {"Dirt", "dirt"}
 
 
 
---Functions
+--Interface Functions
 local function decode(letter, x, y)
   local left = x
   gpu.setBackground(0xFFFFFF)
@@ -309,6 +309,10 @@ local function displayScreen(topItemIndex)
   createRow(topItemIndex + 2, 3)
   createRow(topItemIndex + 3, 4)
 end
+
+
+
+--Sorting Functions
 
 
 

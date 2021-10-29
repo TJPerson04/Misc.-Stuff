@@ -4,6 +4,7 @@ local computer = require("computer")
 local component = require("component")
 local event = require("event")
 local gpu = component.gpu
+local transposerSide = 
 
 --Letters
 local alphabet = {}
@@ -316,13 +317,21 @@ end
 
 
 
---Main
+--Start
 gpu.setResolution(160, 50)
 local w, h = gpu.getResolution()
 local topItemIndex = 0
 
+local chests = {}
+for address, name in component.list("transposer", false) do
+  component.proxy(address).store(transposerSide, 
+  chests
+
 displayScreen(topItemIndex)
 
+
+
+--Main
 while true do
   local _, _, _, scrollDir, _ = event.pull("scroll") --Note to self: test best way to check for either scroll, key press, or mouse click
   if (scrollDir < 0 and topItemIndex < 10) then

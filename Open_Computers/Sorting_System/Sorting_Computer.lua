@@ -251,6 +251,10 @@ items[0] = {"Gold Ingot", "gold_ingot"}
 items[1] = {"Gold Ore", "gold_ore"}
 items[2] = {"Stone", "stone"}
 items[3] = {"Dirt", "dirt"}
+items[4] = {"Iron Ingot", "iron_ingot"}
+items[5] = {"Iron Ore", "iron_ore"}
+items[6] = {"Diamond", "diamond"}
+items[7] = {"Diamond Ore", "diamond_ore"}
 
 
 
